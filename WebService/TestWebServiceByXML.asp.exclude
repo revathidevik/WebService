@@ -1,0 +1,53 @@
+<html>
+<body>
+<script language="jscript">
+        function btn_click (a, b)
+        {
+                var xmlObj = new ActiveXObject("Msxml2.DOMDocument") ;
+                var sXml  = "<?xml version=\"1.0\" ?>" ;
+                      sXml += "<soap:Envelope "
+                      sXml += "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " ;
+                      sXml += "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " ;
+                      sXml += "xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" ;
+                      sXml += "<soap:Body>" ;
+                      sXml += "<Add xmlns=\"http://tempuri.org/\">" ;
+                      sXml = sXml + "<a>" + a.value  + "</a>" ;
+                      sXml = sXml + "<b>" + b.value  + "</b>" ;                      
+                      sXml += "</Add></soap:Body></soap:Envelope>"
+                
+                xmlObj.loadXML(sXml) ;
+                
+                XmlRequest.innerText =  xmlObj.xml  ;
+                
+                var xmlHTTP = new ActiveXObject("Msxml2.XMLHTTP") ;
+                xmlHTTP.Open ( "Post", "http://localhost/ASP.NET/MyWebService.asmx", false) ;
+                xmlHTTP.setRequestHeader("SOAPAction", "http://tempuri.org/Add") ;
+                xmlHTTP.setRequestHeader("Content-Type", "text/xml; charset=utf-8" ) ;
+                xmlHTTP.Send(xmlObj.xml) ;
+                MyResult.innerText =  xmlHTTP.responseText ;
+                
+                var xmlResponse = xmlHTTP.responseXML ;
+                answer.innerText = xmlResponse.selectSingleNode("soap:Envelope/soap:Body/AddResponse/AddResult").text ;
+        }
+
+</script>
+
+
+<form>
+        <p>Please input a:<input id="a" name="a"></input></p>
+        <p>Please input b:<input id="b" name="b"></input></p> 
+        <p>
+        <input type="button" id="btn"  value="Enter" 
+                onclick="jscript:btn_click(a, b)"></input>
+        </p>
+        <p>Answer is <span id="answer"></span></p>
+        <hr></hr>
+        <p>Request:</p>
+        <span id="XmlRequest"></span>
+        <p>Response:</p>        
+        <span id="MyResult"></span>
+        
+</form>
+
+</body>
+</html>

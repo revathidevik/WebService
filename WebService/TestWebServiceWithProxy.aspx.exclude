@@ -1,0 +1,28 @@
+<%@ page language="C#" %>
+
+<html>
+<script runat="server">
+
+        void btn_click(Object source, EventArgs e)
+        {
+                MyClass mycls = new MyClass() ;
+                int x = Int32.Parse(a.Text) ;
+                int y = Int32.Parse(b.Text);
+                
+                Message.Text = mycls.Add( x, y).ToString() ;
+        }
+
+</script>
+
+<body>
+<form Action = "TestWebServiceWithProxy.aspx" runat="server">
+
+        <asp:TextBox id="a" runat="server" />
+        <asp:TextBox id="b" runat="server" />        
+        <asp:button id=btn OnClick="btn_click" Text="Enter" runat="server" />        
+        <p><asp:label id="Message" runat="server" /></P
+        
+</form>
+</body>
+</html>
+

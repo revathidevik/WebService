@@ -1,0 +1,4 @@
+<%@ WebService Language="C#" 
+  class="MyWebService.MyStringReverse, MyWebServiceImpl" %>
+  
+

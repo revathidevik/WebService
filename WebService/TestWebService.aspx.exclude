@@ -1,0 +1,14 @@
+<html>
+
+<body>
+
+<form action="http://localhost/ASP.NET/MyWebService.asmx/Add"  method="POST">
+
+        <input name="a"></input>
+        <input name="b"></input>
+        
+        <input type="submit" value="Enter"></input>
+</form>
+
+</body>
+</html>
